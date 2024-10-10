@@ -4,6 +4,23 @@ using Week3EntityFramework.Dtos;
 
 var context = new IndustryConnectWeek2Context();
 
+//Task-1 Start
+
+// Query to retrieve customers who don't have any sales
+var customersWithoutSales = context.Customers
+    .Where(c => !c.Sales.Any())  // Ensure no sales exist for the customer
+    .ToList();
+
+// Display the customers
+foreach (var customer in customersWithoutSales)
+{
+    Console.WriteLine($"Customer: {customer.FirstName} {customer.LastName}");
+}
+
+//Task - 1 END
+
+
+
 //var customer = new Customer
 //{
 //    DateOfBirth = DateTime.Now.AddYears(-20)
