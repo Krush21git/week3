@@ -4,6 +4,85 @@ using Week3EntityFramework.Dtos;
 
 var context = new IndustryConnectWeek2Context();
 
+//Task-1 Start
+
+// Query to retrieve customers who don't have any sales
+var customersWithoutSales = context.Customers
+    .Where(c => !c.Sales.Any())  // Ensure no sales exist for the customer
+    .ToList();
+
+// Display the customers
+foreach (var customer in customersWithoutSales)
+{
+    Console.WriteLine($"Customer: {customer.FirstName} {customer.LastName}");
+}
+
+//Task - 1 END
+
+
+//Task-2 Start
+
+// Create a new customer
+var newCustomer = new Customer
+{
+    FirstName = "kp",
+    LastName = "desai",
+    DateOfBirth = DateTime.Now.AddYears(-20) // Assume 25 years old
+};
+
+// Create a new sale for this customer
+var newSale = new Sale
+{
+    DateSold = DateTime.Now, // Sale amount
+    ProductId = 1,
+    StoreId = 1,
+    Customer = newCustomer // Link this sale to the new customer
+};
+
+// Add the customer and sale to the context
+context.Customers.Add(newCustomer);
+context.Sales.Add(newSale); // Alternatively, if using navigation properties, EF will automatically add the sale when you add the customer
+
+// Save changes to the database
+context.SaveChanges();
+
+Console.WriteLine("New customer and sale record added successfully!");
+
+//Task-2 End
+
+//Task 3//
+
+try
+{
+    // Create a new store
+    var newStore = new Store
+    {
+        Name = "Store D",
+        Location = "London",
+    };
+
+    // Add the store to the context
+    context.Stores.Add(newStore);
+
+    // Save changes to the database
+    context.SaveChanges();
+    Console.WriteLine("New store added successfully.");
+}
+catch (DbUpdateException ex)
+{
+    Console.WriteLine("An error occurred while saving changes to the database:");
+    Console.WriteLine(ex.InnerException?.Message);
+}
+catch (Exception ex)
+{
+    Console.WriteLine("An unexpected error occurred:");
+    Console.WriteLine(ex.Message);
+}
+
+//Task3 END
+
+
+
 //var customer = new Customer
 //{
 //    DateOfBirth = DateTime.Now.AddYears(-20)
