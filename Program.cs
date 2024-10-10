@@ -50,6 +50,37 @@ Console.WriteLine("New customer and sale record added successfully!");
 
 //Task-2 End
 
+//Task 3//
+
+try
+{
+    // Create a new store
+    var newStore = new Store
+    {
+        Name = "Store D",
+        Location = "London",
+    };
+
+    // Add the store to the context
+    context.Stores.Add(newStore);
+
+    // Save changes to the database
+    context.SaveChanges();
+    Console.WriteLine("New store added successfully.");
+}
+catch (DbUpdateException ex)
+{
+    Console.WriteLine("An error occurred while saving changes to the database:");
+    Console.WriteLine(ex.InnerException?.Message);
+}
+catch (Exception ex)
+{
+    Console.WriteLine("An unexpected error occurred:");
+    Console.WriteLine(ex.Message);
+}
+
+//Task3 END
+
 
 
 //var customer = new Customer
