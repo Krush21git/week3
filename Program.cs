@@ -81,7 +81,18 @@ catch (Exception ex)
 
 //Task3 END
 
+// Start Task4
 
+var storesWithSales = context.Stores
+        .Where(s => s.Sales.Any()) // Checks if there are any sales for the store
+        .ToList();
+
+foreach (var store in storesWithSales)
+{
+    Console.WriteLine($"Store Name: {store.Name}, Location: {store.Location}");
+}
+
+// End Task4
 
 //var customer = new Customer
 //{
