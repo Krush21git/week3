@@ -20,6 +20,37 @@ foreach (var customer in customersWithoutSales)
 //Task - 1 END
 
 
+//Task-2 Start
+
+// Create a new customer
+var newCustomer = new Customer
+{
+    FirstName = "kp",
+    LastName = "desai",
+    DateOfBirth = DateTime.Now.AddYears(-20) // Assume 25 years old
+};
+
+// Create a new sale for this customer
+var newSale = new Sale
+{
+    DateSold = DateTime.Now, // Sale amount
+    ProductId = 1,
+    StoreId = 1,
+    Customer = newCustomer // Link this sale to the new customer
+};
+
+// Add the customer and sale to the context
+context.Customers.Add(newCustomer);
+context.Sales.Add(newSale); // Alternatively, if using navigation properties, EF will automatically add the sale when you add the customer
+
+// Save changes to the database
+context.SaveChanges();
+
+Console.WriteLine("New customer and sale record added successfully!");
+
+//Task-2 End
+
+
 
 //var customer = new Customer
 //{
